@@ -33,7 +33,7 @@ The integration of Explainable Artificial Intelligence (XAI) and Transfer Learni
 
 # Dataset
 
-
+"hello"
 
 This dataset is part of the Frontiers Research Topic on "Datasets for Brain-Computer Interface Applications" and was initially used in a study to assess the performance of a gaze-independent Brain-Computer Interface (BCI) based on covert spatial attention shifts [Reichert et.al, 2020](https://doi.org/10.3389/fnins.2020.591777). The BCI aims to decode binary decisions based on visual stimuli presented in opposite visual hemifields. Participants communicated their responses by covertly shifting attention, while EEG and EOG data were recorded. This dataset is particularly useful for research in BCI, attention modeling, and EEG-based decision decoding, providing valuable insights into how spatial attention shifts can be detected and decoded.
 
