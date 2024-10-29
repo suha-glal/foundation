@@ -36,7 +36,7 @@ The integration of Explainable Artificial Intelligence (XAI) and Transfer Learni
 
 # Dataset
 
-"hello"
+
 
 This dataset is part of the Frontiers Research Topic on "Datasets for Brain-Computer Interface Applications" and was initially used in a study to assess the performance of a gaze-independent Brain-Computer Interface (BCI) based on covert spatial attention shifts [Reichert et.al, 2020](https://doi.org/10.3389/fnins.2020.591777). The BCI aims to decode binary decisions based on visual stimuli presented in opposite visual hemifields. Participants communicated their responses by covertly shifting attention, while EEG and EOG data were recorded. This dataset is particularly useful for research in BCI, attention modeling, and EEG-based decision decoding, providing valuable insights into how spatial attention shifts can be detected and decoded.
 
@@ -303,6 +303,23 @@ Segmenting EEG Data for Each Stimulus Sequence
 
 In short, these steps helped prevent bias, focused on brain regions associated with visual attention, and ensured that only relevant EEG data segments were used for analyzing attention shifts.
 
+## Run(block),trials, stimul(epoch)
+Each participant performs 7 runs in total:
+
+First 2 Runs: No questions are presented. In these runs:
+
+1. Run 1: The participant is asked to focus on the green cross for the entire duration.
+2. Run 2: The participant is asked to focus on the red cross throughout.
+3. Runs 3–6: Objective yes/no questions are presented (e.g., “Is Berlin a city?”). Each of these runs consists of 24 trials with factual questions.
+
+4. Run 7: This final run involves subjective yes/no questions (e.g., “Are you a vegetarian?”), which allows for personal responses.
+
+
+Each participant answers 120 questions over the course of 5 runs (Runs 3–7):
+
+Runs 3–6: Each of these 4 runs includes 24 trials with objective questions, totaling 4×24=96 objective questions.
+Run 7: This run includes 24 trials with subjective questions, adding up to 24 questions.
+Thus, across these 5 runs, participants answer 96+24=120 questions.
 
 ## Preprocessing
 
