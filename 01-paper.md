@@ -255,11 +255,51 @@ In short, each trial involved choosing an answer, tracking a stimulus sequence, 
 
 This section explains how the EEG data was prepared to ensure accurate readings of brain activity, focusing on preventing bias, choosing relevant channels, and selecting specific data segments:
 
-Re-referencing the EEG Data: To avoid creating differences between the left and right sides of the brain due to using a single reference point (which can introduce a "hemispheric bias"), the EEG signals were referenced to the average of both the left and right mastoids (the bony areas behind each ear). This balanced reference helps create a more accurate representation of overall brain activity.
+Re-referencing the EEG Data
+: To avoid creating differences between the left and right sides of the brain due to using a single reference point (which can introduce a "hemispheric bias"), the EEG signals were referenced to the average of both the left and right mastoids (the bony areas behind each ear). This balanced reference helps create a more accurate representation of overall brain activity.
 
-Using a Subset of Channels: Although 29 electrodes covered the entire head (to ensure comprehensive data availability), only 14 specific channels located in the parieto-occipital region were used for analyzing visual attention. These channels (like O9, O10, and Pz) are positioned over the areas of the brain involved in processing visual stimuli and attention shifts, making them ideal for detecting changes in where participants are focusing.
+#### Example Steps for Re-referencing EEG Data:
 
-Segmenting EEG Data for Each Stimulus Sequence: For each trial, the EEG data corresponding to the specific time window of the stimulus sequence was extracted. Start and stop triggers were sent to the EEG device just before and after the stimulus sequence, marking the precise segment of data relevant to the task.
+1. **Record Raw EEG Data**: During the EEG recording, include electrodes placed on both the left and right mastoids. Let’s assume we have raw EEG signals recorded from all scalp electrodes and two additional channels specifically for the left and right mastoids.
+
+2. **Calculate the Average Mastoid Reference**:  
+   Compute the average signal from the left and right mastoid channels for each time point. If $M_{\text{left}}(t)$ is the signal from the left mastoid and $M_{\text{right}}(t)$ is from the right mastoid, then the average mastoid reference $M_{\text{avg}}(t)$ at any time $t$ can be calculated as:
+```{math}
+:label: mastoid-average
+M_{\text{avg}}(t) = \frac{M_{\text{left}}(t) + M_{\text{right}}(t)}{2}
+```
+3. **Re-reference Each EEG Channel**:  
+   For each EEG channel, subtract the average mastoid reference $M_{\text{avg}}(t)$ from the original EEG signal recorded at that channel. If $E_i(t)$ is the signal from EEG channel $i$, the re-referenced signal $E_i^{\prime}(t)$ for each channel $i$ is calculated as:
+
+```{math}
+:label: eeg-referenced
+E_i^{\prime}(t) = E_i(t) - M_{\text{avg}}(t)
+```
+
+4. **Store or Use the Re-referenced Data**:  
+   The resulting EEG signals are now re-referenced to the average mastoid, reducing any left-right bias and providing a balanced view of brain activity.
+
+#### Example Code (Python / MNE Library)
+If using Python’s MNE library, the re-referencing can be done as follows:
+
+```python
+import mne
+
+# Load your EEG data
+raw = mne.io.read_raw_yourfile()  # replace 'yourfile' with the file path
+
+# Specify the mastoid channels
+mastoids = ['M1', 'M2']  # example names for left (M1) and right (M2) mastoid channels
+
+# Set the EEG reference to the average of M1 and M2
+raw.set_eeg_reference(ref_channels=mastoids)
+```
+
+Using a Subset of Channels
+: Although 29 electrodes covered the entire head (to ensure comprehensive data availability), only 14 specific channels located in the parieto-occipital region were used for analyzing visual attention. These channels (like O9, O10, and Pz) are positioned over the areas of the brain involved in processing visual stimuli and attention shifts, making them ideal for detecting changes in where participants are focusing.
+
+Segmenting EEG Data for Each Stimulus Sequence
+: For each trial, the EEG data corresponding to the specific time window of the stimulus sequence was extracted. Start and stop triggers were sent to the EEG device just before and after the stimulus sequence, marking the precise segment of data relevant to the task.
 
 In short, these steps helped prevent bias, focused on brain regions associated with visual attention, and ensured that only relevant EEG data segments were used for analyzing attention shifts.
 
@@ -304,9 +344,9 @@ We use **canonical correlation analysis (CCA)** to estimate spatial filters and 
 
 CCA successively determines coefficient vectors **a** and **b** that linearly combine two sets of variables, **X** and **Y**, such that the correlation between **X a** and **Y b** is maximized. This is expressed mathematically as:
 
-\[
+```{math}
 (u, v) = \arg \max \, \text{corr}(X a, Y b)
-\]
+```
 
 where \( u \) and \( v \) are the resulting canonical variables.
 
