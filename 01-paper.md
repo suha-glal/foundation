@@ -368,5 +368,5 @@ CCA successively determines coefficient vectors **a** and **b** that linearly co
 where \( u \) and \( v \) are the resulting canonical variables.
 
 In summary, this decoding approach uses CCA to create a model that identifies meaningful brain activity patterns, allowing the system to apply this model to unseen data for real-time classification and cross-validation.
-
+# Example Code
 [Example-code](https://gitlab.stimulate.ovgu.de/christoph.reichert/visual-spatial-attention-bci/-/tree/master?ref_type=heads)
